@@ -6,7 +6,10 @@ class DatabaseAccessor(object):
     databaseName = ''
     tableName = ''
 
-    # get a document by its given db _id 
+    def getAll(self):
+        return self.getTable().find()
+
+    # get a document by its given db _id
     def getDocumentById(self, id):
         return self.getTable().find_one({"_id": id})
 

@@ -3,7 +3,7 @@ from database import dbaccessor
 from database import attackmodel
 from filereader import csvreader
 
-def main():
+def addCsvFileToDb():
     global db
     db = dbaccessor.DatabaseAccessor("terrordb", "globalattacks")
     csvreader.readCsvFile('globalterrorismdb_0616dist.csv', convertAndSubmitToDb)
@@ -33,4 +33,4 @@ def convertAndSubmitToDb(attack):
     return
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(addCsvFileToDb())
