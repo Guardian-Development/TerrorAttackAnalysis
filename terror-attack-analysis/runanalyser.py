@@ -52,15 +52,24 @@ def generateMonthCount():
 def generateYearCount():
     db = dbaccessor.DatabaseAccessor("terrordb", "globalattacks")
     analyser = dateanalyser.DateAnalyser(db)
-    count = analyser.getYearCount()
-    return count
+    yearCount = analyser.getYearCount()
+    values = [value for key, value in yearCount.items()]
+    lineGraphGenerator(
+        yearCount.keys(),
+        values,
+        'Terror Attacks By Year',
+        'Year',
+        'Terror Attack Count',
+        'terror-attack-by-year.html')
+    return yearCount
 
 def generateGraphs():
     generateDayCount()
     generateMonthCount()
+    generateYearCount()
     return
 
-#helper method to build a bar graph 
+#helper method to build a bar graph
 def barGraphGenerator(xData, yData, orientation, name, xLabel, yLabel, filename):
     data = [go.Bar(x=xData, y=yData, orientation=orientation, name=name)]
     layout = go.Layout(
@@ -75,6 +84,24 @@ def barGraphGenerator(xData, yData, orientation, name, xLabel, yLabel, filename)
     fig = go.Figure(data=data, layout=layout)
     py.offline.plot(fig, filename=filename)
     return
+
+def lineGraphGenerator(xData, yData, name, xLabel, yLabel, filename):
+    data = [go.Scatter(
+        x = xData,
+        y = yData,
+        name = 'name',
+        line = dict(
+            color = ('rgb(205, 12, 24)'),
+            width = 4)
+    )]
+    layout = dict(
+            title = name,
+            xaxis = dict(title = xLabel),
+            yaxis = dict(title = yLabel),
+        )
+
+    fig = dict(data=data, layout=layout)
+    py.offline.plot(fig, filename=filename)
 
 if __name__ == '__main__':
     sys.exit(generateGraphs())
