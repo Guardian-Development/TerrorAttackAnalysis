@@ -2,7 +2,7 @@
 class DateAnalyser(object):
 
     dbaccessor = None
-
+    
     def getDayCount(self):
         count = [0 for i in range(31)]
         attacks = self.dbaccessor.getAll()
