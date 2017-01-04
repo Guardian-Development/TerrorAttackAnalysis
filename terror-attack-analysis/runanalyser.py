@@ -1,6 +1,6 @@
 import sys
-import plotly as py
-import plotly.graph_objs as go
+from graphgenerator import bargenerator as gb
+from graphgenerator import linegenerator as gl
 from analysis import dateanalyser
 from database import dbaccessor
 
@@ -9,7 +9,7 @@ def generateDayCount():
     analyser = dateanalyser.DateAnalyser(db)
     dayCount = analyser.getDayCount()
     days = range(1, 32)
-    barGraphGenerator(
+    gb.generate(
         days,
         dayCount,
         'v',
@@ -38,7 +38,7 @@ def generateMonthCount():
         'November',
         'December'
     ]
-    barGraphGenerator(
+    gb.generate(
         months,
         monthCount,
         'v',
@@ -54,7 +54,7 @@ def generateYearCount():
     analyser = dateanalyser.DateAnalyser(db)
     yearCount = analyser.getYearCount()
     values = [value for key, value in yearCount.items()]
-    lineGraphGenerator(
+    gl.generate(
         yearCount.keys(),
         values,
         'Terror Attacks By Year',
@@ -68,40 +68,6 @@ def generateGraphs():
     generateMonthCount()
     generateYearCount()
     return
-
-#helper method to build a bar graph
-def barGraphGenerator(xData, yData, orientation, name, xLabel, yLabel, filename):
-    data = [go.Bar(x=xData, y=yData, orientation=orientation, name=name)]
-    layout = go.Layout(
-        title=name,
-        xaxis=dict(
-            title=xLabel,
-        ),
-        yaxis=dict(
-            title=yLabel,
-        )
-    )
-    fig = go.Figure(data=data, layout=layout)
-    py.offline.plot(fig, filename=filename)
-    return
-
-def lineGraphGenerator(xData, yData, name, xLabel, yLabel, filename):
-    data = [go.Scatter(
-        x = xData,
-        y = yData,
-        name = 'name',
-        line = dict(
-            color = ('rgb(205, 12, 24)'),
-            width = 4)
-    )]
-    layout = dict(
-            title = name,
-            xaxis = dict(title = xLabel),
-            yaxis = dict(title = yLabel),
-        )
-
-    fig = dict(data=data, layout=layout)
-    py.offline.plot(fig, filename=filename)
 
 if __name__ == '__main__':
     sys.exit(generateGraphs())
