@@ -1,7 +1,9 @@
 import sys
 from graphgenerator import bargenerator as gb
 from graphgenerator import linegenerator as gl
+from graphgenerator import mapgenerator as gm
 from analysis import dateanalyser
+from analysis import targetanalyser
 from database import dbaccessor
 
 def generateDayCount():
@@ -63,10 +65,21 @@ def generateYearCount():
         'terror-attack-by-year.html')
     return yearCount
 
+def generateKillsWithWeaponByRegionAndYear():
+    db = dbaccessor.DatabaseAccessor("terrordb", "globalattacks")
+    analyser = targetanalyser.TargetAnalyser(db)
+    regionKills = analyser.getLocationWithKills()
+    gm.generate(
+        regionKills,
+        'Deaths by Location for Attacks',
+        'terror-attack-weapon-kills-region.html')
+    return
+
 def generateGraphs():
-    generateDayCount()
-    generateMonthCount()
-    generateYearCount()
+    #generateDayCount()
+    #generateMonthCount()
+    #generateYearCount()
+    generateKillsWithWeaponByRegionAndYear()
     return
 
 if __name__ == '__main__':

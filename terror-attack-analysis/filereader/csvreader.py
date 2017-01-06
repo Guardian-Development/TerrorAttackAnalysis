@@ -6,4 +6,4 @@ def readCsvFile(filename, func):
         reader = csv.reader(csvfile)
         for row in reader:
             func(row)
-    return 
+    return

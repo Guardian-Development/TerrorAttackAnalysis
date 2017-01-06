@@ -11,19 +11,23 @@ def addCsvFileToDb():
 
 def convertAndSubmitToDb(attack):
     model = attackmodel.buildAttack(
-        attack[0],
-        attack[1],
-        attack[2],
-        attack[3],
-        attack[7],
-        attack[8],
-        attack[9],
-        attack[10],
-        attack[11],
-        attack[12],
-        attack[13],
-        attack[14],
-        attack[18])
+        attack[0], #eventId
+        attack[1], #year
+        attack[2], #month
+        attack[3], #day
+        attack[7], #countryId
+        attack[8], #countryName
+        attack[9], #regionId
+        attack[10], #regionName
+        attack[11], #state
+        attack[12], #city
+        attack[13], #latitude
+        attack[14], #longitude
+        attack[18], #description
+        attack[34], #targetId
+        attack[35], #targetDescription
+        attack[100], #kill count
+        attack[99]) #weapon used
     try:
         id = db.insertDocument(model)
         print(id)

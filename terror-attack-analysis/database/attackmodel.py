@@ -12,10 +12,14 @@ def buildAttack(
     city,
     latitude,
     longitude,
-    description):
+    description,
+    targetId,
+    targetDescription,
+    numberKilled,
+    weapon):
 
     return {
-        "event_id" : eventId,
+        "_id" : eventId,
         "year" : year,
         "month" : month,
         "day" : day,
@@ -27,5 +31,9 @@ def buildAttack(
         "city" : city,
         "latitude" : latitude,
         "longitude" : longitude,
-        "description" : description
+        "description" : description,
+        "target_id" : targetId,
+        "target_description" : targetDescription,
+        "kill_count" : numberKilled,
+        "weapon" : weapon
     }
