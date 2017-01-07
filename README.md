@@ -1,5 +1,6 @@
 # Terror Attack Analysis
 Using data analysis with Python on a Global Terror Attack Database.
+Please see the html pages for the interactive graphs.
 
 # Findings
 
