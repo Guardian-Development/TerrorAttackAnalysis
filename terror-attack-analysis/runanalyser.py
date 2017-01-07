@@ -71,14 +71,31 @@ def generateKillsWithWeaponByRegionAndYear():
     regionKills = analyser.getLocationWithKills()
     gm.generate(
         regionKills,
-        'Deaths by Location for Attacks',
-        'terror-attack-weapon-kills-region.html')
+        'Scale of attack based on the number of people killed in Year: 2007',
+        2007,
+        'terror-attack-weapon-kills-region-2007.html')
+    gm.generate(
+        regionKills,
+        'Scale of attack based on the number of people killed in Year: 2010',
+        2010,
+        'terror-attack-weapon-kills-region-2010.html')
+    gm.generate(
+        regionKills,
+        'Scale of attack based on the number of people killed in Year: 2015',
+        2015,
+        'terror-attack-weapon-kills-region-2015.html')
+    # -1 flag to do all.
+    gm.generate(
+        regionKills,
+        'Scale of attack based on the number of people killed in 50,000 attacks since 1970',
+        -1,
+        'terror-attack-weapon-kills-region-since-1970.html')
     return
 
 def generateGraphs():
-    #generateDayCount()
-    #generateMonthCount()
-    #generateYearCount()
+    generateDayCount()
+    generateMonthCount()
+    generateYearCount()
     generateKillsWithWeaponByRegionAndYear()
     return
 

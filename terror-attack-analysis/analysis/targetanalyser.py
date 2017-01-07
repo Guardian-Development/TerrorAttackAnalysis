@@ -9,14 +9,23 @@ class TargetAnalyser(object):
 
         for attack in attacks:
             formatAttack = {}
-            formatAttack["kills"] = attack["kill_count"]
+
+            try:
+                formatAttack["kills"] = int(attack["kill_count"])
+            except Exception as e:
+                #kills were 0
+                formatAttack["kills"] = 0
+
             formatAttack["city"] = attack["city"]
+            formatAttack["region"] = attack["region_name"]
+            formatAttack["year"] = attack["year"]
             formatAttack["description"] = attack["description"]
+
             try:
                 formatAttack["longitude"] = float(attack["longitude"])
                 formatAttack["latitude"] = float(attack["latitude"])
             except Exception as e:
-                print("could not add long lat so skipped")
+                #could not convert lat lng
                 continue
             attackLocation.append(formatAttack)
 
